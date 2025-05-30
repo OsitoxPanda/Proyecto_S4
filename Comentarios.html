@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comentarios 😒</title>
+  <link rel="stylesheet" href="./Styles/Styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Comentarios del Foro 🙂👍</h1>
+    <div id="messages"></div>
+    <div class="form-group">
+      <input type="text" id="username" placeholder="Nombre" required />
+    </div>
+    <div class="form-group">
+      <textarea id="message" placeholder="Escribe tu mensaje..." required></textarea>
+    </div>
+    <button onclick="addMessage()">Enviar</button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", loadMessages);
+
+    function loadMessages() {
+      const messagesContainer = document.getElementById("messages");
+      fetch("https://comentariosweb-791e5-default-rtdb.firebaseio.com/messages.json")
+        .then((res) => res.json())
+        .then((data) => {
+          messagesContainer.innerHTML = "";
+          if (!data) return;
+          Object.values(data).forEach(({ username, text }) => {
+            const div = document.createElement("div");
+            div.classList.add("message");
+            div.innerHTML = `<strong>${username}</strong><p>${text}</p>`;
+            messagesContainer.appendChild(div);
+          });
+        })
+        .catch((error) => {
+          messagesContainer.innerHTML = `<p style="color:#f88;">Error cargando comentarios.</p>`;
+          console.error("Error fetching messages:", error);
+        });
+    }
+
+    function addMessage() {
+      const username = document.getElementById("username").value.trim();
+      const message = document.getElementById("message").value.trim();
+      if (!username || !message) return alert("Por favor, escribe nombre y mensaje.");
+
+      fetch("https://comentariosweb-791e5-default-rtdb.firebaseio.com/messages.json", {
+        method: "POST",
+        body: JSON.stringify({ username, text: message }),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Error al enviar el mensaje");
+          document.getElementById("username").value = "";
+          document.getElementById("message").value = "";
+          loadMessages();
+        })
+        .catch((error) => alert("No se pudo enviar el mensaje. Intenta más tarde."));
+    }
+  </script>
+</body>
+</html>

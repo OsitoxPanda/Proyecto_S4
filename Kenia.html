@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenia OS | Sitio Oficial</title>
+    <style>
+        /* Estilos generales */
+        :root {
+            --azul-cobalto: #0047AB;
+            --mostaza: #FFD700;
+            --rosa: #FF6B8B;
+            --melocoton: #FFA07A;
+            --gris-calido: #F5F3F0;
+            --dorado: #D4AF37;
+            --verde: #2E8B57;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--gris-calido);
+            color: #333;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h2 {
+            color: var(--azul-cobalto);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Carrusel */
+        .gallery {
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .carousel img {
+            min-width: 100%;
+            object-fit: cover;
+            height: 500px;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        .carousel-btn {
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin: 0 1rem;
+            color: var(--azul-cobalto);
+            transition: all 0.3s;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background: var(--mostaza);
+            opacity: 0.5;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        /* Biografía */
+        .bio-content {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .bio-text {
+            flex: 2;
+        }
+
+        .bio-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .bio-image img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 15px;
+            border: 5px solid var(--mostaza);
+        }
+
+        .bio-highlights {
+            padding-left: 1.5rem;
+        }
+
+        .bio-highlights li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Discografía */
+        .discography {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .album {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .album:hover {
+            transform: translateY(-10px);
+        }
+
+        .album-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .album-info {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .album-title {
+            font-weight: bold;
+            margin: 0.5rem 0;
+            color: #333;
+        }
+
+        .album-year {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .modal-header {
+            border-bottom: 2px solid var(--mostaza);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--azul-cobalto);
+            margin: 0;
+        }
+
+        .modal-subtitle {
+            color: #555;
+            font-style: italic;
+        }
+
+        .tracklist {
+            margin: 1.5rem 0;
+        }
+
+        .track {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .track-number {
+            color: var(--rosa);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .inspiration {
+            background: var(--gris-calido);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        /* Redes Sociales */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .social-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-card h3 {
+            margin: 0.5rem 0;
+            color: var(--azul-cobalto);
+        }
+
+        .social-followers {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .instagram { border-top: 4px solid #E1306C; }
+        .tiktok { border-top: 4px solid #000000; }
+        .youtube { border-top: 4px solid #FF0000; }
+        .spotify { border-top: 4px solid #1DB954; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Carrusel de Fotos -->
+        <section>
+            <h2>Kenia Os</h2>
+            <div class="gallery">
+                <div class="carousel" id="carousel">
+                    <img src="./imagenes/Kenia OS1.jpg" alt="Kenia OS en concierto">
+                    <img src="./imagenes/Kenia Os2.png" alt="Kenia OS backstage">
+                    <img src="./imagenes/Kenia OS3.jpg" alt="Sesión de fotos">
+                    <img src="./imagenes/Kenis Os4.jpg" alt="En el escenario">
+                </div>
+                <div class="carousel-nav">
+                    <button class="carousel-btn" id="prevBtn">&#10094;</button>
+                    <button class="carousel-btn" id="nextBtn">&#10095;</button>
+                </div>
+                <div class="carousel-dots" id="dots-container"></div>
+            </div>
+        </section>
+
+        <!-- Biografía -->
+        <section>
+            <h2>Biografía</h2>
+            <div class="bio-content">
+                <div class="bio-text">
+                    <p><strong>Kenia Os</strong> (Kenia Guadalupe Flores Osuna) es una cantante, compositora y celebridad digital mexicana nacida el 15 de julio de 1999 en Mazatlán, Sinaloa.</p>
+                    
+                    <h3>Trayectoria</h3>
+                    <p>Inició su carrera en redes sociales, acumulando millones de seguidores antes de lanzarse a la música en 2021. Su fusión de pop urbano con letras empoderadoras la ha convertido en una de las artistas jóvenes más influyentes del género.</p>
+                    
+                    <h3>Logros</h3>
+                    <ul class="bio-highlights">
+                        <li>Primer lugar global en Spotify con "Malas Decisiones" (2023)</li>
+                        <li>Álbum "K23" en Top 10 de Billboard Latin</li>
+                        <li>+500 millones de streams en plataformas</li>
+                        <li>Giras internacionales en EUA y Latinoamérica</li>
+                    </ul>
+                </div>
+                <div class="bio-image">
+                    <img src="./imagenes/kenia OsOF.jpg" alt="Kenia OS">
+                </div>
+            </div>
+        </section>
+
+        <!-- Discografía -->
+        <section>
+            <h2>Discografía</h2>
+            <div class="discography">
+                <div class="album" onclick="openModal('Cambios de Luna', '2018', [
+                    '1. Intro',
+                    '2. Luna Llena',
+                    '3. Eclipse',
+                    '4. Fases',
+                    '5. Noche Estrellada'
+                ], 'Este álbum explora temas de crecimiento personal y resiliencia, inspirado en las fases lunares como metáfora de los cambios en la vida.', 'Mensaje: Aceptar los ciclos naturales de la vida.')">
+                    <img src="./imagenes/Cambios De Luna.jpg" alt="Cambios de Luna" class="album-img">
+                    <div class="album-info">
+                        <div class="album-title">Cambios de Luna</div>
+                        <div class="album-year">2018</div>
+                    </div>
+                </div>
+
+                <div class="album" onclick="openModal('K23', '2020', [
+                    '1. Big Bang',
+                    '2. Galaxias',
+                    '3. Estrellas Fugaces',
+                    '4. Vía Láctea',
+                    '5. Supernova'
+                ], 'Un viaje cósmico a través del amor y la autoexploración, con sonidos electrónicos y letras poéticas.', 'Mensaje: Todos somos parte de algo más grande.')">
+                    <img src="./imagenes/K23.jpg" alt="K23
+                " class="album-img">
+                    <div class="album-info">
+                        <div class="album-title">K23</div>
+                        <div class="album-year">2022</div>
+                    </div>
+                </div>
+
+                <div class="album" onclick="openModal('K23', '2023', [
+                    '1. Malas Decisiones',
+                    '2. Ojo x Ojo',
+                    '3. Pariente',
+                    '4. Por el Resto de Tu Vida',
+                    '5. Cómo?'
+                ], 'Álbum que consolida su estilo urbano-pop, con colaboraciones internacionales y ritmos bailables.', 'Mensaje: Empoderamiento femenino y autenticidad.')">
+                    <img src="./imagenes/PINK AURA.jpg" alt="K23" class="album-img">
+                    <div class="album-info">
+                        <div class="album-title">Pink Aura</div>
+                        <div class="album-year">2024</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Redes Sociales -->
+        <section>
+            <h2>Redes Sociales</h2>
+            <div class="social-grid">
+                <a href="https://instagram.com/keniaos" target="_blank" class="social-card instagram">
+                    <div class="social-icon">📸</div>
+                    <h3>Instagram</h3>
+                    <p>@keniaos</p>
+                    <span class="social-followers">15.2M seguidores</span>
+                </a>
+                
+                <a href="https://tiktok.com/@keniaos" target="_blank" class="social-card tiktok">
+                    <div class="social-icon">🎵</div>
+                    <h3>TikTok</h3>
+                    <p>@keniaos</p>
+                    <span class="social-followers">12.8M seguidores</span>
+                </a>
+                
+                <a href="https://www.youtube.com/channel/UCSEY-xdBrV-J1zpLg9-mr6w" target="_blank" class="social-card youtube">
+                    <div class="social-icon">▶️</div>
+                    <h3>YouTube</h3>
+                    <p>Kenia OS</p>
+                    <span class="social-followers">8.4M suscriptores</span>
+                </a>
+                
+                <a href="https://open.spotify.com/intl-es/artist/31VFEohvhOUKrtAONEBhMG?si=_PbfyhvkSASQR5NuEa-HFw" target="_blank" class="social-card spotify">
+                    <div class="social-icon">🎧</div>
+                    <h3>Spotify</h3>
+                    <p>Kenia OS</p>
+                    <span class="social-followers">22M oyentes mensuales</span>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal Discografía -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-album-title"></h3>
+                <p class="modal-subtitle" id="modal-album-year"></p>
+            </div>
+            <div class="tracklist" id="modal-tracklist"></div>
+            <div class="inspiration">
+                <h4>Inspiración</h4>
+                <p id="modal-inspiration"></p>
+                <p id="modal-message" style="font-weight: bold; color: var(--azul-cobalto);"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Carrusel de Fotos
+        const carousel = document.getElementById('carousel');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('dots-container');
+        const images = document.querySelectorAll('.carousel img');
+        let currentIndex = 0;
+
+        // Crear puntos indicadores
+        images.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+            updateCarousel();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            updateCarousel();
+        });
+
+        setInterval(() => {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            updateCarousel();
+        }, 5000);
+
+        // Modal Discografía
+        function openModal(title, year, tracks, inspiration, message) {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'flex';
+
+            document.getElementById('modal-album-title').textContent = title;
+            document.getElementById('modal-album-year').textContent = year;
+            document.getElementById('modal-inspiration').textContent = inspiration;
+            document.getElementById('modal-message').textContent = message;
+
+            const tracklist = document.getElementById('modal-tracklist');
+            tracklist.innerHTML = '';
+            tracks.forEach((track, index) => {
+                const trackElement = document.createElement('div');
+                trackElement.className = 'track';
+                trackElement.innerHTML = `<span class="track-number">${index + 1}.</span> ${track}`;
+                tracklist.appendChild(trackElement);
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

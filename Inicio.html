@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inicio - Mi Página Colorida</title>
+  <link rel="stylesheet" href="Styles/estilos.css">
+
+</head>
+<body>
+
+  <!-- 🌟 INICIO -->
+  <section class="inicio">
+    <div class="contenido">
+      <h1>¡Hola! Bienvenid@s a mi espacio 🌟</h1>
+      <p>Esta página está hecha con amorsh, sangre, sudror y asi pue ✨💜</p>
+      <div class="botones">
+        <a href="./Kenia.html">💖 Sección Kenia OS</a>
+        <a href="./seccion2.html">🎬 Galeria Personal y spam Propio</a>
+        <a href="./Comentarios.html">🗨️ Comentarios</a>
+      </div>
+    </div>
+    <!-- 🐼 Mascota -->
+    <div class="mascota" title="¡Hola! 🐾">🐼</div>
+  </section>
+
+  <!-- 🌍 DATOS CURIOSOS -->
+  <section class="curiosidades">
+    <h2>¿Sabías que...?</h2>
+    <p id="dato-curioso">Los pulpos tienen tres corazones 💖</p>
+  </section>
+
+  <!-- 📸 GALERÍA POLAROID MUSICAL -->
+  <section class="galeria-polaroid">
+    <h2>Galería Polaroid 🎞️</h2>
+    <div class="polaroid-container">
+      <div class="polaroid"><img src="./imagenes/Imagen1.jpeg" alt="Imagen 1"></div>
+      <div class="polaroid"><img src="./imagenes/Imagen2.jpeg" alt="Imagen 2"></div>
+      <div class="polaroid"><img src="./imagenes/Imagen3.jpeg" alt="Imagen 3"></div>
+      <div class="polaroid"><img src="./imagenes/Imagen4.jpeg" alt="Imagen 4"></div>
+      <div class="polaroid"><img src="./imagenes/Imagen5.jpeg" alt="Imagen 5"></div>
+      <div class="polaroid"><img src="./imagenes/Imagen6.jpeg" alt="Imagen 6"></div>
+    </div>
+  </section>
+
+  <!-- 🔮 JAVASCRIPT -->
+  <script>
+    const datos = [
+      "Los pulpos tienen tres corazones 💖",
+      "En Júpiter llueven diamantes 💎",
+      "Las abejas pueden reconocer rostros humanos 🐝",
+      "Los flamencos nacen grises 🦩",
+      "Las mariposas saborean con los pies 🦋"
+    ];
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % datos.length;
+      document.getElementById("dato-curioso").textContent = datos[i];
+    }, 4000);
+  </script>
+</body>
+</html>
