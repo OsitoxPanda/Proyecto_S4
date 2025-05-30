@@ -1,0 +1,186 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(188, 191, 244, 0.648);
+}
+
+header {
+    background: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Estilos para Comentarios.html */
+.container {
+    max-width: 600px;
+    margin: 30px auto;
+    background: white;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(100, 100, 255, 0.3);
+    border: 2px solid #5a55ca;
+}
+
+.container h1 {
+    color: #5a55ca;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+    text-shadow: 1px 1px 4px rgba(90, 85, 202, 0.6);
+}
+
+.message {
+    border-bottom: 1px solid #ddd;
+    padding: 12px 0;
+    transition: background-color 0.3s ease;
+    border-radius: 6px;
+}
+
+.message:last-child {
+    border-bottom: none;
+}
+
+.message:hover {
+    background-color: #e6e6ff;
+}
+
+.message strong {
+    display: block;
+    color: #3f3bbf;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.message p {
+    margin: 0;
+    color: #444;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.form-group {
+    margin-top: 18px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 15px;
+    border: 2px solid #5a55ca;
+    border-radius: 8px;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #3f3bbf;
+    outline: none;
+    box-shadow: 0 0 8px rgba(90, 85, 202, 0.5);
+}
+
+button {
+    background: #5a55ca;
+    color: white;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(90, 85, 202, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background: #3f3bbf;
+}
+
+/* Estilos para seccion1.html */
+.contenedor {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+}
+
+.descripcion {
+    text-align: center;
+    margin: 10px 0;
+    color: #555;
+}
+
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.galeria img {
+    width: 30%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.videos {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.videos iframe {
+    width: 45%;
+    height: 250px;
+}
+
+@media (max-width: 768px) {
+    .galeria img,
+    .videos iframe {
+        width: 100%;
+    }
+}

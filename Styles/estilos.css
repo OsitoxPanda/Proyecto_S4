@@ -1,0 +1,109 @@
+/* Estilo general */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff0f5;
+  color: #333;
+}
+
+/* INICIO */
+.inicio {
+  background: linear-gradient(135deg, #ffccf9, #c9caff);
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.inicio .contenido h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #4b0082;
+}
+
+.inicio .contenido p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+.botones a {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 24px;
+  background-color: #fff;
+  color: #4b0082;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.botones a:hover {
+  transform: scale(1.1);
+  background-color: #ffe6f7;
+}
+
+/* Mascota */
+.mascota {
+  font-size: 3rem;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  cursor: pointer;
+}
+
+/* DATOS CURIOSOS */
+.curiosidades {
+  background-color: #fbeaff;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.curiosidades h2 {
+  font-size: 2rem;
+  color: #800080;
+  margin-bottom: 20px;
+}
+
+.curiosidades p {
+  font-size: 1.2rem;
+  color: #444;
+}
+
+/* GALERÍA POLAROID */
+.galeria-polaroid {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.galeria-polaroid h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #663399;
+}
+
+.polaroid-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.polaroid {
+  background: white;
+  padding: 10px;
+  width: 160px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease;
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.polaroid img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
